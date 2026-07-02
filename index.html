@@ -191,7 +191,20 @@
 
   .btn:hover { background: var(--apple); transform: translateX(2px); }
 
-  .placeholder-box {
+  .transit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .transit-line {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin: 0;
+  }
+
+
     border: 1px dashed var(--sage-line);
     background: var(--sage);
     border-radius: 10px;
@@ -358,10 +371,34 @@
           <span data-cs>Google kalendář →</span>
           <span data-en>Google calendar →</span>
         </a>
-        <a class="btn" href="https://mapy.com/s/palaforelu" target="_blank" rel="noopener">
-          <span data-cs>Mapa zahrady →</span>
-          <span data-en>Garden map →</span>
-        </a>
+      </div>
+    </section>
+
+    <!-- HOW TO GET HERE -->
+    <section id="doprava">
+      <div class="section-head">
+        <h2 data-cs>Jak se k nám dostat</h2>
+        <h2 data-en>How to get here</h2>
+      </div>
+
+      <a class="btn" href="https://mapy.com/s/jodenahuha" target="_blank" rel="noopener" style="margin-bottom: 1.3rem;">
+        <span data-cs>Mapa →</span>
+        <span data-en>Map →</span>
+      </a>
+
+      <div class="transit-list">
+        <p class="transit-line">
+          <span data-cs>pěšky ze zastávky Sulická (bus)</span>
+          <span data-en>on foot from Sulická stop (bus)</span>
+        </p>
+        <p class="transit-line">
+          <span data-cs>pěšky z Nádraží Krč (bus, vlak)</span>
+          <span data-en>on foot from Nádraží Krč (bus, train)</span>
+        </p>
+        <p class="transit-line">
+          <span data-cs>autem sjezd z Jižní spojky u McDonald's, parkování zdarma přímo před zahradou</span>
+          <span data-en>by car, exit Jižní spojka by the McDonald's, free parking right in front</span>
+        </p>
       </div>
     </section>
 
