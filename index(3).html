@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Komunitní zahrada Velký háj</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #ffffff;
+    --sage: #eef2e6;
+    --sage-line: #dbe3cf;
+    --ink: #1c2b1e;
+    --ink-soft: #5b6b5a;
+    --green: #2f5233;
+    --green-deep: #1b3320;
+    --gold: #c1892e;
+    --apple: #8a2c1f;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .lang-tab {
+    position: fixed;
+    top: 1.75rem;
+    right: 0;
+    display: flex;
+    background: var(--green-deep);
+    border-radius: 6px 0 0 6px;
+    overflow: hidden;
+    box-shadow: -2px 3px 10px rgba(27,51,32,0.18);
+    z-index: 10;
+  }
+
+  .lang-tab button {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    border: none;
+    background: transparent;
+    color: #cdd8c8;
+    padding: 0.55rem 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .lang-tab button.active { background: var(--gold); color: #fff; }
+  .lang-tab button:not(.active):hover { color: #fff; }
+
+  header { margin-bottom: 3rem; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 0.75rem;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 6vw, 2.7rem);
+    line-height: 1.12;
+    margin: 0 0 0.9rem;
+    color: var(--green-deep);
+  }
+
+  .desc {
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    line-height: 1.65;
+    margin: 0;
+    max-width: 48ch;
+  }
+
+  section { margin-bottom: 3.2rem; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    border-bottom: 2px solid var(--green-deep);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--gold);
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--green-deep);
+  }
+
+  .table-wrap {
+    background: var(--sage);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--sage-line);
+    margin-bottom: 1.1rem;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+
+  thead th {
+    background: var(--green-deep);
+    color: #f2f0e6;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0.85rem 0.9rem;
+    font-weight: 500;
+  }
+
+  tbody td {
+    padding: 0.75rem 0.9rem;
+    border-top: 1px solid var(--sage-line);
+    vertical-align: top;
+  }
+
+  tbody td:first-child { font-weight: 500; color: var(--ink); width: 38%; }
+
+  td.center { text-align: center; color: var(--ink-soft); }
+  td .price { display: block; font-weight: 600; color: var(--green-deep); }
+  td .price + .price { margin-top: 0.2rem; }
+
+  .fee-row td {
+    background: var(--green-deep);
+    color: #f2f0e6;
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 0.9rem;
+  }
+
+  .fee-row td:first-child { color: #f2f0e6; }
+
+  .fee-row td:not(:first-child) { text-align: center; }
+
+  .fee-row td .sub {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 0.78rem;
+    color: #cdd8c8;
+    margin-top: 0.15rem;
+  }
+
+  .footnotes { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.6; margin: 0.8rem 0 1.3rem; }
+  .footnotes p { margin: 0.2rem 0; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    color: #fff;
+    background: var(--gold);
+    padding: 0.7rem 1.1rem;
+    border-radius: 6px;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn:hover { background: var(--apple); transform: translateX(2px); }
+
+  .placeholder-box {
+    border: 1px dashed var(--sage-line);
+    background: var(--sage);
+    border-radius: 10px;
+    padding: 1.6rem;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .entries { list-style: none; margin: 0; padding: 0; }
+  .entry { border-bottom: 1px solid var(--sage-line); }
+
+  .entry a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    padding: 0.95rem 0.1rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: padding-left 0.2s ease, color 0.2s ease;
+  }
+
+  .entry a:hover { padding-left: 0.5rem; color: var(--apple); }
+
+  .entry .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    width: 1.6rem;
+  }
+
+  .entry .title { font-family: 'Fraunces', serif; font-size: 1.08rem; font-weight: 600; display: block; }
+  .entry .sub { font-size: 0.82rem; color: var(--ink-soft); display: block; margin-top: 0.1rem; }
+  .entry .arrow { margin-left: auto; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; }
+
+  footer { margin-top: 3rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--ink-soft); }
+
+  [data-en] { display: none; }
+  html.lang-en [data-cs] { display: none; }
+  html.lang-en [data-en] { display: revert; }
+
+  @media (max-width: 560px) {
+    table { font-size: 0.82rem; }
+    thead th { padding: 0.65rem 0.55rem; }
+    tbody td { padding: 0.6rem 0.55rem; }
+    .lang-tab { top: 1rem; }
+    .wrap { padding-top: 4.5rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="lang-tab" role="group" aria-label="Language / Jazyk">
+    <button id="btn-cs" class="active" onclick="setLang('cs')">CZ</button>
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+
+  <div class="wrap">
+
+    <header>
+      <h1 data-cs>Komunitní zahrada Velký háj</h1>
+      <h1 data-en>Velký háj Community Garden</h1>
+      <p class="desc" data-cs>Ať je tato zahrada místem péče, sdílení a radosti.</p>
+      <p class="desc" data-en>May this garden be a place of care, sharing, and joy.</p>
+    </header>
+
+    <!-- MEMBERSHIP -->
+    <section id="clenstvi">
+      <div class="section-head">
+        <h2 data-cs>Členství a poplatky</h2>
+        <h2 data-en>Membership &amp; fees</h2>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th><span data-cs>Kategorie členství</span><span data-en>Membership category</span></th>
+              <th><span data-cs>Pěstuji a pečuji o společné prostory</span><span data-en>I grow &amp; tend shared spaces</span></th>
+              <th><span data-cs>Využívám společné prostory</span><span data-en>I use shared spaces</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span data-cs>Pěstování na vlastním záhonu</span><span data-en>Growing on your own plot</span></td>
+              <td>
+                <span class="price"><span data-cs>Záhony na poli — 1 000 Kč</span><span data-en>Field plot — 1,000 CZK</span></span>
+                <span class="price">
+                  <span data-cs>Vyvýšené záhony:</span><span data-en>Raised beds:</span>
+                </span>
+                <span class="price"><span data-cs>2 000 Kč — velký záhon</span><span data-en>2,000 CZK — large bed</span></span>
+                <span class="price"><span data-cs>1 500 Kč — malý záhon</span><span data-en>1,500 CZK — small bed</span></span>
+              </td>
+              <td class="center">—</td>
+            </tr>
+            <tr>
+              <td><span data-cs>Kompostování a vyhazování bioodpadu</span><span data-en>Composting &amp; bio-waste disposal</span></td>
+              <td class="center"><span data-cs>ANO</span><span data-en>Yes</span></td>
+              <td class="center"><span data-cs>ANO</span><span data-en>Yes</span></td>
+            </tr>
+            <tr>
+              <td><span data-cs>Soukromé akce (1–2×) *</span><span data-en>Private events (1–2×) *</span></td>
+              <td class="center"><span data-cs>ANO</span><span data-en>Yes</span></td>
+              <td class="center"><span data-cs>ANO</span><span data-en>Yes</span></td>
+            </tr>
+            <tr>
+              <td><span data-cs>Zalévání a péče o společné záhony / stromky</span><span data-en>Watering &amp; care of shared beds / trees</span></td>
+              <td class="center"><span data-cs>ANO</span><span data-en>Yes</span></td>
+              <td class="center">—</td>
+            </tr>
+            <tr>
+              <td><span data-cs>Účast na hromadných brigádách / příprava akcí **</span><span data-en>Communal work days / event prep **</span></td>
+              <td class="center"><span data-cs>ANO</span><span data-en>Yes</span></td>
+              <td class="center">—</td>
+            </tr>
+            <tr>
+              <td><span data-cs>Využívání společného vybavení (např. k ohništi, zahradní nářadí aj.)</span><span data-en>Use of shared equipment (fire pit, garden tools, etc.)</span></td>
+              <td class="center"><span data-cs>ANO</span><span data-en>Yes</span></td>
+              <td class="center"><span data-cs>ANO</span><span data-en>Yes</span></td>
+            </tr>
+            <tr>
+              <td><span data-cs>Sběr plodů a bylin ze společných záhonů</span><span data-en>Harvesting produce &amp; herbs from shared beds</span></td>
+              <td class="center"><span data-cs>ANO</span><span data-en>Yes</span></td>
+              <td class="center">—</td>
+            </tr>
+            <tr class="fee-row">
+              <td><span data-cs>Roční poplatek</span><span data-en>Annual fee</span></td>
+              <td>
+                <span data-cs>1 000 Kč</span><span data-en>1,000 CZK</span>
+                <span class="sub"><span data-cs>+ poplatek za záhon</span><span data-en>+ plot fee</span></span>
+              </td>
+              <td><span data-cs>500 Kč</span><span data-en>500 CZK</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footnotes">
+        <p><span data-cs>* Oslavy, workshopy aj. V případě akcí většího charakteru dle domluvy s koordinačním týmem.</span>
+        <span data-en>* Celebrations, workshops, etc. For larger events, by arrangement with the coordination team.</span></p>
+        <p><span data-cs>** 20 hod brigády ročně. V případě neúčasti lze nahradit jinou činností nebo poplatkem 200 Kč/hod.</span>
+        <span data-en>** 20 hours of communal work per year. If you can't take part, this can be replaced with another activity or a fee of 200 CZK/hour.</span></p>
+      </div>
+
+      <a class="btn" href="https://drive.google.com/file/d/1n7Y1uqwyfJc2A17hqIuHr8D_7kGpmI-C/view?usp=sharing" target="_blank" rel="noopener">
+        <span data-cs>Pravidla zahrady →</span>
+        <span data-en>Garden rules →</span>
+      </a>
+    </section>
+
+    <!-- EVENTS -->
+    <section id="akce">
+      <div class="section-head">
+        <h2 data-cs>Akce</h2>
+        <h2 data-en>Events</h2>
+      </div>
+      <div class="placeholder-box" style="margin-bottom: 1.1rem;">
+        <p style="margin:0"><span data-cs>Zatím zde nejsou žádné plánované akce. Sledujte kalendář — brzy zde přibudou termíny brigád a setkání.</span>
+        <span data-en>No events are listed here yet. Check the calendar — work days and get-togethers will appear there soon.</span></p>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:0.7rem;">
+        <a class="btn" href="https://calendar.google.com/calendar/u/4?cid=emFocmFkYXZlbGt5aGFqQGdtYWlsLmNvbQ" target="_blank" rel="noopener">
+          <span data-cs>Google kalendář →</span>
+          <span data-en>Google calendar →</span>
+        </a>
+        <a class="btn" href="https://mapy.com/s/palaforelu" target="_blank" rel="noopener">
+          <span data-cs>Mapa zahrady →</span>
+          <span data-en>Garden map →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- MORE LINKS -->
+    <section id="odkazy">
+      <div class="section-head">
+        <h2 data-cs>Další odkazy</h2>
+        <h2 data-en>More links</h2>
+      </div>
+      <ul class="entries">
+        <li class="entry">
+          <a href="mailto:zahradavelkyhaj@gmail.com">
+            <span class="meta">
+              <span class="title"><span data-cs>Kontakt</span><span data-en>Contact</span></span>
+              <span class="sub">zahradavelkyhaj@gmail.com</span>
+            </span>
+            <span class="arrow">→</span>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="#" target="_blank" rel="noopener">
+            <span class="meta">
+              <span class="title"><span data-cs>Fotogalerie</span><span data-en>Photo gallery</span></span>
+              <span class="sub"><span data-cs>snímky ze zahrady</span><span data-en>pictures from the garden</span></span>
+            </span>
+            <span class="arrow">→</span>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="https://forms.gle/mmNJzJLo9iuY2tjt6" target="_blank" rel="noopener">
+            <span class="meta">
+              <span class="title"><span data-cs>Přihláška nového člena</span><span data-en>New member sign-up</span></span>
+              <span class="sub"><span data-cs>formulář</span><span data-en>form</span></span>
+            </span>
+            <span class="arrow">→</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <script>
+    function setLang(lang) {
+      document.documentElement.classList.toggle('lang-en', lang === 'en');
+      document.documentElement.lang = lang;
+      document.getElementById('btn-cs').classList.toggle('active', lang === 'cs');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.title = lang === 'en' ? 'Velký háj Community Garden' : 'Komunitní zahrada Velký háj';
+      localStorage.setItem('site-lang', lang);
+    }
+    (function () {
+      var saved = localStorage.getItem('site-lang');
+      if (saved === 'en') setLang('en');
+    })();
+  </script>
+
+</body>
+</html>
