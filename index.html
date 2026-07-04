@@ -204,7 +204,50 @@
     margin: 0;
   }
 
+  .faq-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--green-deep);
+    margin: 0 0 1rem;
+  }
 
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem 2rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .faq-q {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.02rem;
+    color: var(--ink);
+    margin: 0 0 0.35rem;
+  }
+
+  .faq-a {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .faq-closing {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-top: 1.3rem;
+  }
+
+  .faq-closing a { color: var(--apple); font-weight: 600; }
+
+  @media (max-width: 560px) {
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+
+  .placeholder-box {
     border: 1px dashed var(--sage-line);
     background: var(--sage);
     border-radius: 10px;
@@ -350,10 +393,65 @@
         <span data-en>** 20 hours of communal work per year. If you can't take part, this can be replaced with another activity or a fee of 200 CZK/hour.</span></p>
       </div>
 
+      <div class="section-head" style="margin-top: 0.4rem;">
+        <h2 data-cs>Časté otázky</h2>
+        <h2 data-en>FAQ</h2>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <p class="faq-q"><span data-cs>Voda</span><span data-en>Water</span></p>
+          <p class="faq-a">
+            <span data-cs>Zatím nemáme vlastní zdroj, pracujeme na tom. Do té doby ji draze nakupujeme ze společných peněz — buďte prosím k vodě v nádržích <strong>šetrní</strong>.</span>
+            <span data-en>We don't have our own source yet, but we're working on it. Until then we buy water using shared funds, so please be <strong>sparing</strong> with what's in the tanks.</span>
+          </p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span data-cs>Placení</span><span data-en>Payment</span></p>
+          <p class="faq-a">
+            <span data-cs>Poplatky za záhon a členství plaťte až po registraci, ozveme se vám e-mailem s variabilním symbolem a platebními údaji.</span>
+            <span data-en>Pay the plot and membership fees only after you register — we'll email you a variable symbol and payment details.</span>
+          </p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span data-cs>Kompost</span><span data-en>Compost</span></p>
+          <p class="faq-a">
+            <span data-cs>Než se rozjede kompostování, musíme objednávat z městské kompostárny. Pokud víte o zdroji hnoje nebo kompostu, dejte nám vědět!</span>
+            <span data-en>Until our own composting gets going, we have to order from the city composting facility. If you know of a source of manure or compost, please let us know!</span>
+          </p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span data-cs>Brigády</span><span data-en>Work days</span></p>
+          <p class="faq-a">
+            <span data-cs>Péče o společné prostory — zalévání, sekání, plení — probíhá na organizovaných brigádách. Termíny brzy vypíšeme.</span>
+            <span data-en>Caring for the shared spaces — watering, mowing, weeding — happens at organized work days. Dates will be announced soon.</span>
+          </p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span data-cs>Nářadí</span><span data-en>Tools</span></p>
+          <p class="faq-a">
+            <span data-cs>Nářadí zatím máme málo — jedno kolečko, pár rýčů a lopat, krumpáč. Máte doma nebo na chalupě nářadí navíc v použitelném stavu? Rádi ho přijmeme.</span>
+            <span data-en>We don't have much equipment yet — one wheelbarrow, a few spades and shovels, and a pickaxe. If you have spare tools in usable condition at home or at a cottage, we'd love to take them.</span>
+          </p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span data-cs>Chyby</span><span data-en>Feedback</span></p>
+          <p class="faq-a">
+            <span data-cs>Pokud máte pocit, že něco nefunguje, dejte nám vědět — vaše zpětná vazba nás posouvá dál. Mějte však prosím na paměti, že koordinační tým pracuje ve svém volném čase bez nároku na odměnu.</span>
+            <span data-en>If something feels off, please let us know — your feedback helps us improve. Just keep in mind that the coordination team volunteers their free time without pay.</span>
+          </p>
+        </div>
+      </div>
+
       <a class="btn" href="https://drive.google.com/file/d/1n7Y1uqwyfJc2A17hqIuHr8D_7kGpmI-C/view?usp=sharing" target="_blank" rel="noopener">
         <span data-cs>Pravidla zahrady →</span>
         <span data-en>Garden rules →</span>
       </a>
+
+      <p class="faq-closing">
+        <span data-cs>Vše jste si přečetli a chcete se zapojit? Vyplňte <a href="https://forms.gle/mmNJzJLo9iuY2tjt6" target="_blank" rel="noopener">registrační formulář</a>.<br>Máte další otázky? Napište nám na <a href="mailto:zahradavelkyhaj@gmail.com">zahradavelkyhaj@gmail.com</a>.</span>
+        <span data-en>Read through everything and ready to join? Fill in the <a href="https://forms.gle/mmNJzJLo9iuY2tjt6" target="_blank" rel="noopener">sign-up form</a>.<br>Still have more questions? Email us at <a href="mailto:zahradavelkyhaj@gmail.com">zahradavelkyhaj@gmail.com</a>.</span>
+      </p>
     </section>
 
     <!-- EVENTS -->
@@ -448,12 +546,7 @@
       document.getElementById('btn-cs').classList.toggle('active', lang === 'cs');
       document.getElementById('btn-en').classList.toggle('active', lang === 'en');
       document.title = lang === 'en' ? 'Velký háj Community Garden' : 'Komunitní zahrada Velký háj';
-      localStorage.setItem('site-lang', lang);
     }
-    (function () {
-      var saved = localStorage.getItem('site-lang');
-      if (saved === 'en') setLang('en');
-    })();
   </script>
 
 </body>
